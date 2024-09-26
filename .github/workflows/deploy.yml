@@ -45,7 +45,7 @@ jobs:
         run: |
           cd app
           flutter pub get
-          flutter build web
+          flutter build web --base-href /mordheim-utils/
 
       - name: Publish to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
