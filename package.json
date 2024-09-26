@@ -1,0 +1,15 @@
+{
+  "name": "api",
+  "type": "module",
+  "version": "0.1.0",
+  "files": [
+    "api_bg.wasm",
+    "api.js",
+    "api.d.ts"
+  ],
+  "main": "api.js",
+  "types": "api.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
