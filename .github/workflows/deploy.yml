@@ -1,0 +1,51 @@
+name: Deploy Rust WASM and Flutter App
+
+on:
+  push:
+    branches:
+      - main  # Change to your target branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+
+      - name: Install wasm-pack
+        run: |
+          cargo install wasm-pack
+
+      - name: Build Rust project with wasm-pack
+        run: |
+          cd api
+          wasm-pack build --target web --release
+
+      - name: Move WASM to Flutter Web Directory
+        run: |
+          mkdir -p ../app/web
+          cp -r api/pkg/* ../app/web/  # Adjust this if your package structure differs
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.10.0'  # Specify your required Flutter version
+
+      - name: Build Flutter project
+        run: |
+          cd app
+          flutter pub get
+          flutter build web
+
+      - name: Publish to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./app/build/web
