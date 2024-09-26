@@ -1,3 +1,5 @@
+use wasm_bindgen::prelude::wasm_bindgen;
+
 // +-------------------+
 // | Weapon Skill      |
 // +-------------------+
@@ -14,6 +16,7 @@
 // |  9  |  3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 4 | 4 |
 // | 10  |  3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 4 |
 // +-----+---+---+---+---+---+---+---+---+---+----+
+#[wasm_bindgen]
 pub fn resolve_weapon_skill(my_ws: i32, enemy_ws: i32) -> i32 {
     if my_ws > enemy_ws {
         return 3;

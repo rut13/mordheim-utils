@@ -1,3 +1,4 @@
+use wasm_bindgen::prelude::*;
 // +-----------------------------+
 // | Ballistic Skill Table       |
 // +-----------------------------+
@@ -10,6 +11,7 @@
 // | 5  | 2+                     |
 // | 6+ | 2+                     |
 // +-----------------------------+
+#[wasm_bindgen]
 pub fn resolve_ballistic_skill(bs: i32) -> i32 {
     return 7 - bs;
 }

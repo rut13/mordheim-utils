@@ -1,3 +1,4 @@
+use wasm_bindgen::prelude::wasm_bindgen;
 
 // +-------------------+
 // |  Wound Chart      |
@@ -15,6 +16,7 @@
 // |  9  |  2 | 2 | 2 | 2 | 2 | 2 | 2 | 3 | 4 | 5 |
 // | 10  |  2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 3 | 4 |
 // +-----+---+---+---+---+---+---+---+---+---+----+
+#[wasm_bindgen]
 pub fn resolve_strength_toughness(strength: i32, toughness: i32) -> i32 {
     let difference = strength - toughness;
     if difference >= 2 {
