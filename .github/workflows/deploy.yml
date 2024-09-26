@@ -14,6 +14,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.24.3
+      - run: flutter --version
+
+      - name: Build Flutter project
+        run: |
+          cd app
+          flutter pub get
+          flutter build web --base-href /mordheim-utils/
+
       - name: Set up Rust
         uses: actions-rs/toolchain@v1
         with:
@@ -31,21 +44,8 @@ jobs:
 
       - name: Move WASM to Flutter Web Directory
         run: |
-          mkdir -p ../app/web
-          cp -r api/pkg/* ../app/web/  # Adjust this if your package structure differs
+          cp -r api/pkg/* app/build/web/  # Adjust this if your package structure differs
 
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: stable
-          flutter-version: 3.24.3
-      - run: flutter --version
-
-      - name: Build Flutter project
-        run: |
-          cd app
-          flutter pub get
-          flutter build web --base-href /mordheim-utils/
 
       - name: Publish to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
