@@ -34,14 +34,19 @@ jobs:
           mkdir -p ../app/web
           cp -r api/pkg/* ../app/web/  # Adjust this if your package structure differs
 
+      - name: Move to flutter directory
+        run: |
+          cd ../app
+
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.10.0'  # Specify your required Flutter version
+          channel: stable
+          flutter-version-file: pubspec.yaml # path to pubspec.yaml
+      - run: flutter --version
 
       - name: Build Flutter project
         run: |
-          cd app
           flutter pub get
           flutter build web
 
