@@ -3,7 +3,7 @@ name: Deploy Rust WASM and Flutter App
 on:
   push:
     branches:
-      - main  # Change to your target branch
+      - master
   workflow_dispatch:
 
 jobs:
